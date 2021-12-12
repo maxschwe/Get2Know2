@@ -2,35 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.75">
     <title>Get2Know | Home</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='styles_index.css')}}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for('static', filename='scripts_index.js')}}"></script>
 </head>
-    <body>
-        <div id="container">
-            <h1>Get2Know</h1>
-            
-            <form action="/join" method="post">
-                <div id="wrapper-player-config">
-                    <div id="wrapper-name">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" maxlength="20">
+<body>
+    <div id="container">
+        <h1>Get2Know</h1>
+        
+        <form id="form-settings" action="javascript:join()" method="post">
+            <div id="wrapper-player-config">
+                <div id="wrapper-name">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" maxlength="20" required>
+                </div>
+                <div id="wrapper-game">
+                    <div id="wrapper-create-game" class="game-item">
+                        <h4>Create new game</h4>
+                        <input type=submit id="create-game" class="neon-button" name="join-btn" value="create">
                     </div>
-                    <div id="wrapper-game">
-                        <div id="wrapper-create-game" class="game-item">
-                            <h4>Create new game</h4>
-                            <input type=submit id="create-game" name="create-game" value="Create">
-                        </div>
-                        <div id="wrapper-join-game" class="game-item">
-                            <h4>Join game</h4>
-                            <label for="game-id">Game-ID:</label>
-                            <input type="text" id="game-id" name="game-id" placeholder="z.B. 0187">
-                            <input type=submit id="join-game" name="join-game" value="Join game">
-                        </div>
+                    <div id="wrapper-join-game" class="game-item">
+                        <h4>Join game</h4>
+                        <label for="game-id">Game-ID:</label>
+                        <input type="text" id="game-id" name="game-id" placeholder="z.B. 0187">
+                        <input type=submit id="join-game" class="neon-button" name="join-btn" value="join">
                     </div>
                 </div>
-            </form>
+            </div>
+        </form>
 
-        </div>
-    </body>
+    </div>
+</body>
 </html>

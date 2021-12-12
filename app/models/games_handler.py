@@ -1,4 +1,5 @@
 import logging
+from flask import redirect
 from .game import Game
 
 LEN_GAME_KEY = 4
@@ -13,6 +14,7 @@ class GamesHandler:
         new_game = Game(self, game_id)
         new_game.join(player)
         self.games[game_id] = new_game
+        return game_id
 
     def remove_game(self, game_id):
         self.games.pop(game_id)
@@ -24,7 +26,14 @@ class GamesHandler:
         game.join(player)
         return True
 
+    def render_game(self, game_id, user_id):
+        game = self.get_game(game_id)
+        if game is None:
+            return redirect("/")
+        return game.render(user_id)
+
     def get_game(self, id):
+        print(self.games)
         try:
             return self.games[id]
         except KeyError:

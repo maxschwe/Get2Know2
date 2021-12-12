@@ -1,0 +1,28 @@
+:root {
+  --clr-neon: hsl(317 100% 54%);
+  --clr-bg: hsl(323 21% 16%);
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #71d4f0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 0px;
+  text-align: center;
+}
+
+#container {
+  background-color: #f3de8a;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid black;
+}

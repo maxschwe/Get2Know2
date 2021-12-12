@@ -9,7 +9,7 @@ socketio = SocketIO()
 def create_app(debug):
     app = Flask(__name__)
     app.debug = debug
-    app.config['SECRET_KEY'] = 'gjr39dkjn344_!67#'
+    app.config['SECRET_KEY'] = '10clegende'
 
     from .routes import main as main_blueprint
     app.register_blueprint(main_blueprint)

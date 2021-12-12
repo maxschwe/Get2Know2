@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.75">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles_game.css')}}" />
+    <script type="text/javascript" src="{{url_for('static', filename='lobby.js')}}"></script>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Game-Id: {{game_id}}</h1>
+        <div id="content">
+            <div id="players">
+                <ul>
+                    {%for player in players%}
+                    <li class="player">{{player}}</li>
+                    {%endfor%}
+                </ul>
+            </div>
+            
+            <div id="config">
+                <form action="/start-game" method="post"></form>
+                    <div id="wrapper-rounds">
+                        <input type=range id="rounds" name="rounds" value=4 min=2 max=5 onchange=update_rounds_lbl();>
+                        <input type=text id="rounds-str" name="rounds-str" value="4">
+                    </div>
+                    <div id="wrapper-category">
+
+                    </div>
+                    <input type=submit name="start" value="Start" >
+                </form>
+            </div>
+                
+            
+            
+
+        </div>
+    </div>
+
+</body>
+
+</html>
