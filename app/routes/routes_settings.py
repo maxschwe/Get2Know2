@@ -4,18 +4,33 @@ from flask import render_template, redirect, url_for, request, session
 
 @main.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if 'name' in session:
+        name = session['name']
+        game_id = session['game_id']
+        error = session['error']
+    else:
+        name = game_id = error = ""
+    return render_template("index.html", name=name, game_id=game_id, error=error)
 
 
-@main.route("/join", methods=["POST"])
+@main.route("/join", methods=["POST", "GET"])
 def join():
-    new_player = players_handler.new_player(request.form["name"])
-    session["user-id"] = new_player.id
+    if request.method == "GET":
+        return redirect("/")
+    if 'user_id' in session:
+        games_handler.disconnect_game(session['game_id'], session['user_id'])
+    name = request.form["name"]
+    game_id = request.form["game-id"]
+    new_player = players_handler.new_player(name)
+    session["name"] = name
+    session["game_id"] = game_id
     if request.form["join-btn"] == "join":
-        game_id = request.form["game-id"]
-        valid = games_handler.join_game(game_id, new_player)
+        valid, error = games_handler.join_game(game_id, new_player)
+        session['error'] = error
         if not valid:
             return redirect("/")
     else:
         game_id = games_handler.create_game(new_player)
+    session["user_id"] = new_player.id
+    session["error"] = ""
     return redirect(f"/game/{game_id}")

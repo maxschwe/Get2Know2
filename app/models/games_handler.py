@@ -1,5 +1,5 @@
 import logging
-from flask import redirect
+from flask import redirect, render_template
 from .game import Game
 
 LEN_GAME_KEY = 4
@@ -22,18 +22,25 @@ class GamesHandler:
     def join_game(self, game_id, player):
         game = self.get_game(game_id)
         if game is None:
-            return False
-        game.join(player)
-        return True
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        valid = game.join(player)
+        if not valid:
+            return False, "Dieser Spielername existiert bereits. Such dir einen anderen aus!"
+        return True, ""
 
-    def render_game(self, game_id, user_id):
+    def disconnect_game(self, game_id, player_id):
         game = self.get_game(game_id)
         if game is None:
-            return redirect("/")
-        return game.render(user_id)
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.disconnect(player_id)
+
+    def get_game_state(self, game_id, user_id):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        return game.get_state(user_id)
 
     def get_game(self, id):
-        print(self.games)
         try:
             return self.games[id]
         except KeyError:

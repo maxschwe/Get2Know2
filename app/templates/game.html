@@ -12,36 +12,10 @@
 </head>
 
 <body>
-    <div id="container">
-        <h1>Game-Id: {{game_id}}</h1>
-        <div id="content">
-            <div id="players">
-                <ul>
-                    {%for player in players%}
-                    <li class="player">{{player}}</li>
-                    {%endfor%}
-                </ul>
-            </div>
-            
-            <div id="config">
-                <form action="/start-game" method="post"></form>
-                    <div id="wrapper-rounds">
-                        <input type=range id="rounds" name="rounds" value=4 min=2 max=5 onchange=update_rounds_lbl();>
-                        <input type=text id="rounds-str" name="rounds-str" value="4">
-                    </div>
-                    <div id="wrapper-category">
+    <script>connect()</script>
+    <iframe id="container-frame" src="/game_state">
 
-                    </div>
-                    <input type=submit name="start" value="Start" >
-                </form>
-            </div>
-                
-            
-            
-
-        </div>
-    </div>
-
+    </iframe>
 </body>
 
 </html>

@@ -1,5 +1,7 @@
 from .player import Player
 
+import logging
+
 LEN_PLAYER_ID = 6
 
 
@@ -15,6 +17,13 @@ class PlayersHandler:
 
     def remove_player(self, id):
         self.players.pop(id)
+
+    def get_player(self, id):
+        try:
+            return self.players[id]
+        except KeyError:
+            logging.warning(f"Requested access to invalid user id {id}")
+            return None
 
     def _gen_player_id(self):
         id = LEN_PLAYER_ID * "0"
