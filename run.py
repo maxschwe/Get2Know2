@@ -8,11 +8,10 @@ from app.models import GamesHandler, PlayersHandler
 logging.basicConfig(level=logging.INFO,
                     format="[%(asctime)s] - [%(levelname)s]: %(message)s")
 
-log = logging.getLogger('werkzeug')
-log.disabled = True
+log_flask = logging.getLogger('werkzeug')
+log_flask.disabled = True
 
 app = create_app(debug=True)
-app.logger.removeHandler(default_handler)
 
 if __name__ == "__main__":
-    socketio.run(app, log_output=False)
+    socketio.run(app, debug=True)

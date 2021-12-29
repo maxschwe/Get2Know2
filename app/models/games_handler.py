@@ -12,6 +12,7 @@ class GamesHandler:
     def create_game(self, player):
         game_id = self._gen_game_id()
         new_game = Game(self, game_id)
+        player.creator = True
         new_game.join(player)
         self.games[game_id] = new_game
         return game_id
@@ -34,11 +35,35 @@ class GamesHandler:
             return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
         game.disconnect(player_id)
 
+    def ch_rounds(self, game_id, rounds_num):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.ch_rounds(rounds_num)
+
+    def ch_category(self, game_id, category_num):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.ch_category(category_num)
+
+    def start_game(self, game_id):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.start_game()
+
     def get_game_state(self, game_id, user_id):
         game = self.get_game(game_id)
         if game is None:
             return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
         return game.get_state(user_id)
+
+    def update_player_list(self, game_id):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.emit_update_player_list()
 
     def get_game(self, id):
         try:

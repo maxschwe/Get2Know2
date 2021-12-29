@@ -6,6 +6,8 @@ class Player:
         self.players_handler = players_handler
         self.id = id
         self.name = name
+        self.connected = False
+        self.creator = False
         logging.info(f"Created player: {self.name}, {self.id}")
 
     def remove(self):

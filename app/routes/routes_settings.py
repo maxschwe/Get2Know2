@@ -20,17 +20,18 @@ def join():
     if 'user_id' in session:
         games_handler.disconnect_game(session['game_id'], session['user_id'])
     name = request.form["name"]
-    game_id = request.form["game-id"]
+
     new_player = players_handler.new_player(name)
     session["name"] = name
-    session["game_id"] = game_id
     if request.form["join-btn"] == "join":
+        game_id = request.form["game-id"]
         valid, error = games_handler.join_game(game_id, new_player)
         session['error'] = error
         if not valid:
             return redirect("/")
     else:
         game_id = games_handler.create_game(new_player)
+    session["game_id"] = game_id
     session["user_id"] = new_player.id
     session["error"] = ""
     return redirect(f"/game/{game_id}")
