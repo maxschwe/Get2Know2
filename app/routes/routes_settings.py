@@ -18,7 +18,11 @@ def join():
     if request.method == "GET":
         return redirect("/")
     if 'user_id' in session:
-        games_handler.disconnect_game(session['game_id'], session['user_id'])
+        try:
+            games_handler.disconnect_game(
+                session['game_id'], session['user_id'])
+        except:
+            pass
     name = request.form["name"]
 
     new_player = players_handler.new_player(name)

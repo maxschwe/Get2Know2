@@ -25,6 +25,9 @@ class PlayersHandler:
             logging.warning(f"Requested access to invalid user id {id}")
             return None
 
+    def player_exists(self, player_id):
+        return player_id in self.players
+
     def _gen_player_id(self):
         id = LEN_PLAYER_ID * "0"
         count = 0

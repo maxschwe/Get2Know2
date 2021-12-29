@@ -19,6 +19,7 @@ class GamesHandler:
 
     def remove_game(self, game_id):
         self.games.pop(game_id)
+        logging.info(f"Removed game: {game_id}")
 
     def join_game(self, game_id, player):
         game = self.get_game(game_id)
@@ -71,6 +72,9 @@ class GamesHandler:
         except KeyError:
             logging.warning(f"Requested access to invalid game id {id}")
             return None
+
+    def game_exists(self, game_id):
+        return game_id in self.games
 
     def _gen_game_id(self):
         id = LEN_GAME_KEY * "0"

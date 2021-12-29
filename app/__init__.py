@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_socketio import SocketIO
+import random
+import time
 
-
-socketio = SocketIO(ping_timeout=200)
+random.seed(time.time())
+socketio = SocketIO(ping_timeout=50)
 
 
 def create_app(debug=False):

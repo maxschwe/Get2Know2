@@ -8,6 +8,7 @@ class Player:
         self.name = name
         self.connected = False
         self.creator = False
+        self.game = None
         logging.info(f"Created player: {self.name}, {self.id}")
 
     def remove(self):

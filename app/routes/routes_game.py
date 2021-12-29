@@ -1,6 +1,7 @@
 from . import main, players_handler, games_handler
 from .. import socketio
 import logging
+import time
 
 from flask import render_template, redirect, url_for, request, session
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
@@ -36,10 +37,17 @@ def game_state():
 def new_connection():
     game_id = session["game_id"]
     user_id = session["user_id"]
-    logging.info(f"{user_id} connected")
-    players_handler.players[user_id].connected = True
-    join_room(game_id)
-    games_handler.update_player_list(game_id)
+    join_room(user_id)
+    if games_handler.game_exists(game_id) and players_handler.player_exists(user_id) and user_id in games_handler.get_game(game_id).players:
+        logging.info(f"{user_id} connected")
+        players_handler.players[user_id].connected = True
+        join_room(game_id)
+        time.sleep(0.5)
+        games_handler.update_player_list(game_id)
+    else:
+        emit("restart", room=user_id, namespace="/")
+        logging.info(f"Sent restart cmd to {user_id}")
+        leave_room(user_id)
 
 
 @socketio.on("disconnect")
@@ -48,4 +56,5 @@ def disconnect():
     user_id = session["user_id"]
     logging.info(f"{user_id} disconnected")
     leave_room(game_id)
+    leave_room(user_id)
     games_handler.disconnect_game(game_id, user_id)
