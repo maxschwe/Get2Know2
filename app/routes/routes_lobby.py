@@ -21,3 +21,19 @@ def changed_rounds(rounds_num):
 def start_game():
     game_id = session["game_id"]
     games_handler.start_game(game_id)
+
+
+@socketio.on("response")
+def response(response_txt):
+    game_id = session["game_id"]
+    user_id = session["user_id"]
+    logging.info(f"Response {user_id}: {response_txt}")
+    games_handler.response(game_id, user_id, response_txt)
+
+
+@socketio.on("selection")
+def selection(selected_id):
+    game_id = session["game_id"]
+    user_id = session["user_id"]
+    logging.info(f"Selection {user_id}: {selected_id}")
+    games_handler.selection(game_id, user_id, selected_id)

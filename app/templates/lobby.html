@@ -4,55 +4,52 @@
 		<meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Get2Know | Lobby</title>
+		<link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
         <link rel="stylesheet" href="{{url_for('static', filename='styles_lobby.css')}}">
 		<script src="{{url_for('static', filename='lobby.js')}}"></script>
         <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<div id="main" class="main">
-			<h1>Lobby</h1>
-			<div class="lobby">
-				<div class="overview">
-					<div class="player-list scrollbar">
-						<ul id="ul-player-list">
-							{%for player_name in players:%}
-							<li class="player-name">
-								<h3 id="player-name_item">{{player_name}}</h3>
-							</li>
-							{%endfor%}
-						</ul>
-					</div>
-					<div class="settings">
-						<h2>Gamepin: {{game_id}}</h2>
-						<div class="slideshow">
-							<div class="category"><h2>Category 1</h2></div>
-							<div class="category"><h2>Category 2</h2></div>
-							<div class="category"><h2>Category 3</h2></div>
-							<div class="category"><h2>Category 4</h2></div>
-							{%if creator:%}
-								<button class="btn-slider-left btn-slider" onclick="plusDivs(-1)">&#10094;</button>
-								<button class="btn-slider-right btn-slider" onclick="plusDivs(+1)">&#10095;</button>
-							{%endif%}
-						</div>
-						<div class="settings-gamerules">
-							<h4>Spielrunden:</h4>
-							{%if creator:%}
-							<input id="sl-num-games" type="range" min="1" max="5" value="{{rounds}}" onchange="updateTextInput(this.value);">
-							{%else:%}
-							<input id="sl-num-games" type="range" min="1" max="5" value="{{rounds}}" onchange="updateTextInput(this.value);" disabled>
-							{%endif%}
-							<input type="text" id="num-game" value="{{rounds}}">
-						</div>
-					</div>
+		<h1>Lobby</h1>
+		<div id="container" class="overview">
+
+			<div id="player-list" class="scrollbar container-top">
+				<ul id="ul-player-list">
+					{%for player_name in players:%}
+					<li class="player-name">
+						<h3 id="player-name_item">{{player_name}}</h3>
+					</li>
+					{%endfor%}
+				</ul>
+			</div>
+			<div class="settings">
+				<h3>Gamepin: {{game_id}}</h3>
+				<div id="slideshow">
+					<div class="category"><h2>Category 1</h2></div>
+					<div class="category"><h2>Category 2</h2></div>
+					<div class="category"><h2>Category 3</h2></div>
+					<div class="category"><h2>Category 4</h2></div>
+					{%if creator:%}
+						<button class="btn-slider-left btn-slider" onclick="plusDivs(-1)">&#10094;</button>
+						<button class="btn-slider-right btn-slider" onclick="plusDivs(+1)">&#10095;</button>
+					{%endif%}
+				</div>
+				<div class="settings-gamerules">
+					<label>Spielrunden:</label>
+					{%if creator:%}
+					<input id="sl-num-games" type="range" min="1" max="5" value="{{rounds}}" onchange="updateTextInput(this.value);">
+					{%else:%}
+					<input id="sl-num-games" type="range" min="1" max="5" value="{{rounds}}" onchange="updateTextInput(this.value);" disabled>
+					{%endif%}
+					<input type="text" id="num-game" value="{{rounds}}">
 				</div>
 				{%if creator:%}
-				<div class="start-game">
-					<input type="submit" name="submit_button" class="btn-start-game" value="Starten" onclick="btn_start_game_clicked();">
-				</div>
+				<input id="btn-start-game" type="submit" name="submit_button" class="button" value="Starten" onclick="btn_start_game_clicked();">
 				{%endif%}
-				<script>init_slideshow({{category}});</script>
 			</div>
 		</div>
+		
+		<script>init_slideshow({{category}});</script>
 	</body>
 </html>
 

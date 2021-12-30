@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{url_for('static', filename='selection.js')}}"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h3 id="timer">20 Sekunden verbleibend</h3>
+    
+    {%if cur_id != user_id:%}
+    <h1>Welche Antwort ist von {{turn}}</h1>
+    {%for i, resp in responses:%}
+    {%if user_id != i:%}
+    <input type="submit" id="response" value="{{resp}}" onclick="selection('{{i}}');">
+    {%endif%}
+    {%endfor%}
+    <input type="submit" value="Auswahl bestätigen" onclick="submit_clicked();">
+    {%else%}
+    <h1>Gegebene Antworten von anderen Spielern:</h1>
+    {%for i, resp in responses:%}
+    {%if user_id != i:%}
+    <input type="submit" id="response" value="{{resp}}" onclick="selection('{{i}}');">
+    {%endif%}
+    {%endfor%}
+    
+    <h3>Auf andere Spieler warten, die ihre Auswahl machen...</h3>
+    {%endif%}
+</body>
+</html>

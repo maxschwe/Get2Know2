@@ -1,0 +1,21 @@
+#response {
+  width: 90%;
+  min-width: 600px;
+  padding: 20px;
+  font-size: 20px;
+  resize: none;
+  font-size: 20px;
+  font-family: "Akaya Kanadaka", cursive;
+  text-align: center;
+  border-radius: 8px;
+}
+
+#commit {
+  align-self: flex-end;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

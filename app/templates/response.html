@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles_response.css')}}">
+    <script src="{{url_for('static', filename='response.js')}}"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1>{{question}}</h1>
+    <div id="container">
+        <div class="header">
+            <h4>Runde {{round}}</h4>
+            <h4 id="timer">20 Sekunden verbleibend</h4>
+        </div>
+        
+        <h1>{{question}}</h1>
+        <textarea id="response" rows="4"></textarea>
+        <div class="footer">
+            <input id="commit" type="submit" class="button" value="Antwort bestätigen" onclick="submit_clicked();">
+        </div>
+    </div>
 </body>
 </html>

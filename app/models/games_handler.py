@@ -48,6 +48,18 @@ class GamesHandler:
             return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
         game.ch_category(category_num)
 
+    def response(self, game_id, user_id, response):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.response(user_id, response)
+
+    def selection(self, game_id, user_id, selected_id):
+        game = self.get_game(game_id)
+        if game is None:
+            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+        game.selection(user_id, selected_id)
+
     def start_game(self, game_id):
         game = self.get_game(game_id)
         if game is None:
@@ -57,7 +69,7 @@ class GamesHandler:
     def get_game_state(self, game_id, user_id):
         game = self.get_game(game_id)
         if game is None:
-            return False, "Diese Game-ID existiert nicht. Versuchs erneut!"
+            return redirect("/")
         return game.get_state(user_id)
 
     def update_player_list(self, game_id):

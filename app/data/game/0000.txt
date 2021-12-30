@@ -1,35 +1,37 @@
 {
-    "rounds": 4,
-    "category": "Schule",
+    "rounds": 3,
+    "category": "Allgemein",
     "rounds_data": [
         {
-            "000001": {
-                "question": "Was war die d\u00fcmmste Art wie sich b verletzt hat ?"
-            },
             "000000": {
-                "question": "Was ist as Meinung nach das beste am \u00c4lter werden ?"
+                "question": "Wenn a drei W\u00fcnsche frei h\u00e4tte, w\u00fcrde er/sie...",
+                "responses": {
+                    "000000": ""
+                },
+                "selections": {},
+                "points": {
+                    "000000": 0
+                }
             }
         },
         {
-            "000001": {
-                "question": "Was mag b am Winter lieber als am Sommer ?"
-            },
             "000000": {
-                "question": "Was war as gr\u00f6\u00dfter sportlicher Erfolg?"
+                "question": "Was war as Kreativste Verkleidung zu Halloween oder Karneval?",
+                "responses": {},
+                "selections": {},
+                "points": {
+                    "000000": 0
+                }
             }
         },
         {
-            "000001": {
-                "question": "Was w\u00fcrde b eine Woche ohne Strom machen ?"
-            },
             "000000": {
-                "question": "Welches Gesetz w\u00fcrde a zuerst einf\u00fchren?"
-            }
-        },
-        {
-            "000001": {},
-            "000000": {
-                "question": "Wenn a drei W\u00fcnsche frei h\u00e4tte, w\u00fcrde er/sie..."
+                "question": "Was war die d\u00fcmmste Art wie sich a verletzt hat ?",
+                "responses": {},
+                "selections": {},
+                "points": {
+                    "000000": 0
+                }
             }
         }
     ]

@@ -34,6 +34,7 @@ class Game:
             self.games_handler.remove_game(self.id)
             self.data.state == "end"
             self.emit_state_changed()
+            return
 
         if self.data.state == "lobby":
             self.players.pop(player_id)
@@ -53,7 +54,14 @@ class Game:
 
     def ch_category(self, category):
         self.data.category = category
+        self.data.category = 1  # temporarily until all categories are available
         emit("changed_category", category, room=self.id, namespace="/")
+
+    def response(self, user_id, response):
+        self.data.responses[user_id] = response
+
+    def selection(self, user_id, selected_id):
+        self.data.selections[user_id] = selected_id
 
     def start_game(self):
         self.data.start()
@@ -90,14 +98,14 @@ class Game:
         if self.data.state == "lobby":
             return render_template("lobby.html", **data)
         elif self.data.state == "turn":
-            return render_template("turn.html", game_id=self.id, turn=self.data.current_name)
+            return render_template("turn.html", game_id=self.id, turn=self.data.current_name, round=self.data.round_num)
         elif self.data.state == "response":
-            return render_template("response.html", question=self.data.current_question)
+            return render_template("response.html", question=self.data.current_question, round=self.data.round_num)
         elif self.data.state == "selection":
-            pass
+            return render_template("selection.html", turn=self.data.current_name, round=self.data.round_num, responses=self.data.get_respones(), user_id=user_id, cur_id=self.data.current_player.id)
         elif self.data.state == "overview":
-            pass
+            return render_template("overview.html", player_points=self.data.get_points(user_id))
         elif self.data.state == "end":
-            pass
+            return render_template("end.html")
         else:
-            pass
+            return render_template("index.html")

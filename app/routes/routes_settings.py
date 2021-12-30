@@ -27,7 +27,7 @@ def join():
 
     new_player = players_handler.new_player(name)
     session["name"] = name
-    if request.form["join-btn"] == "join":
+    if request.form["join-btn"] == "Beitreten":
         game_id = request.form["game-id"]
         valid, error = games_handler.join_game(game_id, new_player)
         session['error'] = error
