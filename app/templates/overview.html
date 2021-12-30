@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
     <title>Document</title>
 </head>
 <body>
-    {%for name, points in player_points%}
-    <h3>{{name}}: {{points}}</h3>
-    {%endfor%}
+    <h1>Punkte</h1>
+    <div id="container" class="points">
+        {%for name, points in player_points%}
+        <h3>{{name}}: {{points}} Punkte</h3>
+        {%endfor%}
+    </div>
+    
 </body>
 </html>

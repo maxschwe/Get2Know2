@@ -8,7 +8,7 @@ STATES = ["turn", "response", "selection", "overview"]
 DELAY_TURN_SHOW = 2
 DELAY_RESPONSE = 23
 DELAY_SELECTION = 23
-DELAY_OVERVIEW = 3
+DELAY_OVERVIEW = 5
 
 POINTS_RIGHT_SELECTED = 1
 POINTS_SOMEONE_SELECTED_YOURS = 2
@@ -80,11 +80,13 @@ class GameSystem:
                 self.state = "overview"
                 self.game.emit_state_changed()
                 time.sleep(DELAY_OVERVIEW)
+        time.sleep(20)
         self.state = "end"
         self.game.emit_state_changed()
 
-    def get_respones(self):
-        ret = [[i, resp] for i, resp in self.responses.items() if resp != ""]
+    def get_respones(self, user_id):
+        ret = [[i, resp] for i, resp in self.responses.items() if resp !=
+               "" and i != user_id]
         print(ret)
         return ret
 
@@ -97,10 +99,10 @@ class GameSystem:
 
     def calc_points(self, cur_id):
         for id, selected in self.selections.items():
-            if selected != 0:
+            if selected != -1:
                 if cur_id == selected:
                     self.points[cur_id] += POINTS_RIGHT_SELECTED
-                    self.points[id] += POINTS_RIGHT_SELECTED
+                    self.points[id] += POINTS_SOMEONE_SELECTED_YOURS
                 else:
                     self.points[selected] += POINTS_SOMEONE_SELECTED_YOURS
 

@@ -102,7 +102,7 @@ class Game:
         elif self.data.state == "response":
             return render_template("response.html", question=self.data.current_question, round=self.data.round_num)
         elif self.data.state == "selection":
-            return render_template("selection.html", turn=self.data.current_name, round=self.data.round_num, responses=self.data.get_respones(), user_id=user_id, cur_id=self.data.current_player.id)
+            return render_template("selection.html", turn=self.data.current_name, round=self.data.round_num, responses=self.data.get_respones(user_id), user_id=user_id, cur_id=self.data.current_player.id)
         elif self.data.state == "overview":
             return render_template("overview.html", player_points=self.data.get_points(user_id))
         elif self.data.state == "end":

@@ -1,0 +1,18 @@
+.selection {
+  width: 100%;
+  padding: 10px;
+  background-color: #b2ede5;
+}
+
+.selected {
+  background-color: #7f7fd5;
+}
+
+.selection:hover {
+  background-color: #97adda;
+  cursor: pointer;
+}
+
+#options {
+  min-width: 700px;
+}

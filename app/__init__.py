@@ -4,7 +4,7 @@ import random
 import time
 
 random.seed(time.time())
-socketio = SocketIO(ping_timeout=50)
+socketio = SocketIO(ping_timeout=200)
 
 
 def create_app(debug=False):

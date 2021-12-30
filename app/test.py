@@ -13,7 +13,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def init():
-    return render_template("turn.html")
+    return render_template("selection.html", responses=[["0001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjas"],
+                                                        ["0001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjasdsfal;kjdfs;klajdfl;skajfdklsajdl;fkjas;klfdjsa"],
+                                                        ["000001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjas"],
+                                                        ["0001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjas"],
+                                                        ["0001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjasdsfal;kjdfs;klajdfl;skajfdklsajdl;fkjas;klfdjsa"],
+                                                        ["000001", "lfaksj;fdkajsfdl;kjfdfsjaklsdfjas"]])
 
 
 if __name__ == "__main__":
